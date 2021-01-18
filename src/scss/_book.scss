@@ -1,0 +1,160 @@
+.book {
+  display: flex;
+  position: relative;
+  width: 100%;
+  color: $key-color-2;
+  margin-bottom: 50px;
+  padding-top: 50px;
+  border-top: 2px solid #000;
+
+  .thumbnail {
+    border-radius: 4px;
+    margin-right: 20px;
+  }
+
+  .text-side {
+    display: flex;
+    flex-direction: column;
+    margin-right: 230px;
+  }
+
+  .title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+
+  .authors {
+    font-style: italic;
+    margin-bottom: 10px;
+  }
+  .description {
+    margin-bottom: 15px;
+  }
+
+  .favorite-button {
+    position: absolute;
+    cursor: pointer;
+    padding: 12px 15px;
+    border: 2px solid $key-color-2;
+    background: $key-color-1;
+    color: $key-color-2;
+    font-size: 16px;
+    z-index: 1;
+    overflow: hidden;
+    min-width: 205px;
+    right: 20px;
+    top: -24px;
+    transition: color 200ms ease;
+    box-shadow: $box-shadow;
+
+    &:before {
+      content: '';
+      position: absolute;
+      height: 100%;
+      width: 200%;
+      background: $key-color-2;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      transition: transform 0.7s cubic-bezier(0.2, 0.35, 0.5, 1);
+      transform: translateX(-75%) scaleX(0);
+    }
+
+    &:hover {
+      color: $key-color-1;
+      border: 2px solid $key-color-2;
+
+      &:before {
+        transform: translateX(0%) scaleX(1);
+      }
+    }
+  }
+
+  &::after {
+    position: absolute;
+    content: '';
+    right: 0px;
+    top: 0;
+    width: 2px;
+    height: 50%;
+    background: $key-color-2;
+  }
+}
+
+.book.favorite-book {
+  border: none;
+  border-bottom: 2px solid #000;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  padding-top: 0;
+
+  & > * {
+    font-size: 0.8em;
+  }
+
+  &:last-child {
+    border: none;
+  }
+
+  &::after {
+    display: none;
+  }
+
+  .text-side {
+    margin-right: 0;
+    width: 100%;
+  }
+
+  .favorite-button {
+    position: relative;
+    margin-top: auto;
+    margin-left: 20px;
+    top: unset;
+    right: unset;
+    font-size: 14px;
+    transition: transform 100ms, box-shadow 150ms;
+
+    &.pressed {
+      transform: scale(0.95);
+    }
+
+    &:hover {
+      box-shadow: $box-shadow-hover;
+      color: $key-color-2;
+      transform: scale(1.01);
+    }
+
+    &:before {
+      display: none;
+    }
+  }
+}
+
+@media (max-width: 1350px) {
+  .book {
+    .text-side {
+      margin-right: 20px;
+    }
+
+    &.favorite-book {
+      flex-direction: column;
+      align-items: center;
+
+      .thumbnail {
+        margin-right: 0;
+      }
+
+      .text-side {
+        margin-top: 10px;
+        text-align: center;
+        margin-right: 0;
+
+        button {
+          margin-right: 0;
+          margin-left: 0;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,207 @@
+$key-color-1: white;
+$key-color-2: black;
+$key-color-3: #f7e8a4;
+$white-opacity-background: rgba(255, 255, 255, 0.2);
+$box-shadow: 8px 16px 60px rgba(0, 0, 0, 0.05), 0 2px 12px rgba(0, 0, 0, 0.03);
+$box-shadow-hover: 8px 16px 60px rgba(0, 0, 0, 0.1),
+  0 2px 12px rgba(0, 0, 0, 0.07);
+
+@import './book';
+
+#react-app {
+  width: 100%;
+}
+
+body {
+  background: $key-color-1;
+  font-family: 'Courier New', Courier, monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  position: relative;
+  overflow-x: hidden;
+  color: $key-color-2;
+
+  //Largest background triangle
+  &::after {
+    position: absolute;
+    content: '';
+    left: 0;
+    top: -200px;
+    width: 0;
+    height: 0;
+    border-top: 500px solid transparent;
+    border-right: 1000px solid $key-color-3;
+    border-bottom: 500px solid transparent;
+    z-index: -1;
+    transform: rotate(40deg);
+  }
+
+  //Second to largest background triangle
+  &::before {
+    position: absolute;
+    content: '';
+    left: 815px;
+    top: 620px;
+    width: 0;
+    height: 0;
+    border-top: 350px solid transparent;
+    border-right: 700px solid $key-color-3;
+    border-bottom: 350px solid transparent;
+    z-index: -1;
+    transform: rotate(40deg) scaleX(-1);
+  }
+}
+
+a {
+  text-decoration: none;
+  color: $key-color-2;
+}
+
+.max-width-wrapper {
+  max-width: 80vw;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+
+  //Green background circle
+  &::before {
+    position: absolute;
+    content: '';
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    z-index: -1;
+    top: 1085px;
+    left: 790px;
+    background: #d6f6dd;
+  }
+
+  //Third largest triangle
+  &::after {
+    position: absolute;
+    content: '';
+    left: 214px;
+    top: 995px;
+    width: 0;
+    height: 0;
+    border-top: 250px solid transparent;
+    border-right: 500px solid $key-color-3;
+    border-bottom: 250px solid transparent;
+    z-index: -1;
+    transform: rotate(-77deg);
+  }
+}
+
+h1 {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 15px 100px;
+  margin-top: 8vh;
+  font-size: 36px;
+  font-weight: 300;
+  letter-spacing: 0.4em;
+  border: 2px solid $key-color-2;
+  background: $white-opacity-background;
+  box-shadow: $box-shadow;
+}
+
+form {
+  display: flex;
+
+  .search-bar {
+    font-size: 16px;
+    padding: 10px 15px;
+    min-width: 75%;
+    color: $key-color-2;
+    margin-right: 5px;
+    border: 2px solid $key-color-2;
+    box-shadow: $box-shadow;
+
+    &::placeholder {
+      color: $key-color-2;
+    }
+  }
+
+  .submit-button {
+    cursor: pointer;
+    height: 100%;
+    font-size: 16px;
+    padding: 10px 15px;
+    width: 100%;
+    color: $key-color-2;
+    background: $white-opacity-background;
+    border: 2px solid $key-color-2;
+    box-shadow: $box-shadow;
+    transition: transform 50ms, box-shadow 150ms, background 150ms;
+
+    &.pressed {
+      transform: scale(0.95);
+    }
+
+    &:hover {
+      box-shadow: $box-shadow-hover;
+      transform: scale(1.01);
+      background: rgba(255, 255, 255, 0.3);
+    }
+  }
+}
+
+.content {
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  margin-top: 50px;
+  max-width: 100%;
+
+  .results {
+    max-width: 100%;
+
+    &.reduced-width {
+      max-width: 65%;
+    }
+
+    .loading,
+    .no-results {
+      font-size: 24px;
+      width: 100%;
+      text-align: center;
+
+      &.deactivated {
+        display: none;
+      }
+    }
+  }
+}
+
+.favorites {
+  min-width: 30%;
+  padding: 20px;
+  padding-bottom: 0;
+  background: $white-opacity-background;
+  height: fit-content;
+  width: 30%;
+  margin-left: 20px;
+  border: 2px solid $key-color-2;
+  box-shadow: $box-shadow;
+
+  &.one-favorite .book {
+    border-bottom: none;
+  }
+}
+
+@media (max-width: 1600px) {
+  .max-width-wrapper {
+    max-width: 95%;
+  }
+}
+
+@media (max-width: 767px) {
+  .content .book .text-side .description {
+    display: none;
+  }
+}
